@@ -1,0 +1,35 @@
+version: "3"
+services:
+  eosio:
+    image: eosio/eos:dawn3x
+    ports:
+      - "8888:8888"
+      - "9876:9876"
+    command: /opt/eosio/bin/nodeosd.sh --resync-blockchain
+    volumes:
+      - ./eosio-volume/config:/opt/eosio/bin/data-dir
+      - ./eosio-volume/data:/opt/eosio/var
+  db:
+    build: ./db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: supersecretpassword
+  eoswatcher:
+    build: ./eos_watcher
+    links:
+      - db
+  graphql:
+    build: ./eos_graphql
+    ports:
+      - "4000:4000"
+    links:
+      - db
+  web:
+    build: ./web
+    command: python app.py
+    volumes:
+      - ./web/app
+    ports:
+      - "8080:80"

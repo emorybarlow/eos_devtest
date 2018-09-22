@@ -1,0 +1,26 @@
+{
+  "name": "eos_watcher",
+  "version": "1.0.0",
+  "description": "Application to poll the block chain and record new blocks in a postgres database",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint index.js index.test.js",
+    "coverage": "jest --collectCoverageFrom=**.js --coverage"
+  },
+  "keywords": [
+    "eos"
+  ],
+  "author": "Emory Barlow",
+  "license": "ISC",
+  "dependencies": {
+    "eosjs-api": "^7.0.4",
+    "eslint-plugin-jest": "^21.22.1",
+    "jest": "^23.6.0",
+    "pg": "^7.4.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
